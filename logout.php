@@ -1,10 +1,9 @@
+<?php session_start() ?>
+
 <?php 
+    $_SESSION['id'] = null;
+    $_SESSION['fname'] = null;
+    $_SESSION['lname'] = null;
 
-session_start();
- $_SESSION['username'] = null;
-     $_SESSION['msg'] = "you nust log in first to view this page";
-     header('location: login.php');
-
-
-
+    header('Location: index.php');
 ?>
