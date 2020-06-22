@@ -1,3 +1,16 @@
+<?php 
+ session_start();
+ if(!isset($_SESSION['username'])) {
+     $_SESSION['msg'] = "you nust log in first to view this page";
+     header('location: login.php');
+ }else{
+//  if(isset($_GET['logout'])){
+//      session_destroy();
+//      unset($_SESSION['username']);
+//      header('location: login.php');
+
+//  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +25,7 @@
     <title>The Perfect Cup - Blog</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/business-casual.css" rel="stylesheet">
@@ -36,42 +49,9 @@
     <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                <a class="navbar-brand" href="index.html">The Perfect Cup</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-                    <li>
-                        <a href="blog.html">Blog</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <?php require_once 'nav.php' ?>
 
-
+    
     <div class="container">
 
         <div class="row">
@@ -90,7 +70,7 @@
                         <small>October 13, 2013</small>
                     </h2>
                     <p>Start your morning off with this great recipe for hot coffee with coconut oil and butter.</p>
-                    <a href="#" class="btn btn-default btn-lg">Read More</a>
+                    <button onclick="more()" class="btn btn-default btn-lg">Read More</button>
                      <hr>
                 </div>
                 <div class="col-lg-12 text-center">
@@ -100,7 +80,7 @@
                         <small>October 13, 2013</small>
                     </h2>
                     <p>Take the edge off with a fresh hot cup of coffee make with Irish whiskey and Irish cream.</p>
-                    <a href="#" class="btn btn-default btn-lg">Read More</a>
+                    <button class="btn btn-default btn-lg">Read More</button>
                      <hr>
                 </div>
                 <div class="col-lg-12 text-center">
@@ -110,7 +90,7 @@
                         <small>October 13, 2013</small>
                     </h2>
                     <p>Sweetened with caramel sauce and topped with whipped cream, this will make you happy any time of the day.</p>
-                    <a href="#" class="btn btn-default btn-lg">Read More</a>
+                    <button class="btn btn-default btn-lg">Read More</button>
                     <hr>
                 </div>
                 <div class="col-lg-12 text-center">
@@ -175,7 +155,8 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
-	</div>
+    </div>
+   
     <footer>
         <div class="container">
             <div class="row">
@@ -195,3 +176,4 @@
 </body>
 
 </html>
+<?php } ?>

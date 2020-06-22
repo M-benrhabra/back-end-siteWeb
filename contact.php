@@ -1,3 +1,41 @@
+
+<?php
+
+$result="";
+if(isset($_POST['submit'])){
+    require 'phpmailer/PHPMailerAutoload.php';
+
+    $mail = new PHPMailer;
+
+    //$mail->SMTPDebug = 3;                               // Enable verbose debug output
+
+    // $mail->isSMTP();    s                                  // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'meriem.dev20@gmail.com';                 // SMTP username
+    $mail->Password = 'wordpress@20';                           // SMTP password
+    $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 587;                                    // TCP port to connect to
+
+    $mail->addAddress('meriem.benrhabra1@gmail.com');               // Name is optional
+    $mail->addReplyTo($_POST['email'], $_POST['fname']);
+   
+
+    $mail->isHTML(true);                                  // Set email format to HTML
+
+    $mail->Subject = 'form submission: '.$_POST['subject'];
+    $mail->Body    = '<h2 align=center>Name :'.$_POST['fname'].'<br>Email: '.$_POST['email'].'<br>Message: '.$_POST['message'].'</h2>';
+    // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+    if(!$mail->send()) {
+        $result= 'Message could not be sent.Please try again;';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    } else {
+        $result= 'Message has been sent'.$_POST['fname'];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,40 +75,7 @@
     <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
-                <a class="navbar-brand" href="index.html">The Perfect Cup</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="about.html">About</a>
-                    </li>
-                    <li>
-                        <a href="blog.html">Blog</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <?php require_once 'nav.php' ?>
 
     <div class="container">
 
@@ -111,7 +116,7 @@
                         <strong>form</strong>
                     </h2>
                     <hr>
-                    <div id="add_err2"></div>
+                    <div id="add_err2"> <?php= $result; ?> </div>
                     <form role="form">
                         <div class="row">
                             <div class="form-group col-lg-4">
@@ -128,7 +133,7 @@
                                 <textarea class="form-control" id="message" name="message" maxlength="100" rows="6"></textarea>
                             </div>
                             <div class="form-group col-lg-12">
-                                <button type="submit" id="contact" class="btn btn-default">Submit</button>
+                                <button type="submit" id="contact" name="submit" class="btn btn-default">Submit</button>
                             </div>
                         </div>
                     </form>
