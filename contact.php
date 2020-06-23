@@ -9,7 +9,7 @@ if(isset($_POST['submit'])){
 
     //$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
-    // $mail->isSMTP();    s                                  // Set mailer to use SMTP
+    $mail->isSMTP();                                    // Set mailer to use SMTP
     $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'meriem.dev20@gmail.com';                 // SMTP username
@@ -126,6 +126,10 @@ if(isset($_POST['submit'])){
                             <div class="form-group col-lg-4">
                                 <label>Email Address</label>
                                 <input type="email" id="email" name="email" maxlength="25" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label>Subject </label>
+                                <input type="text" id="subject" name="subject" maxlength="25" class="form-control">
                             </div>
                             <div class="clearfix"></div>
                             <div class="form-group col-lg-12">
