@@ -121,13 +121,13 @@
                     </li>
                    
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Products <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#products"><i class="fa fa-fw fa-arrows-v"></i> Produits <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="products" class="collapse">
                             <li>
-                                <a href="view_products.php">View Products</a>
+                                <a href="voir_produits.php">Voir les Produits</a>
                             </li>
                             <li>
-                                <a href="add_product.php">Add Products</a>
+                                <a href="ajouter_produits.php">Ajouter des Produits</a>
                             </li>
                         </ul>
                     </li>

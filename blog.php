@@ -1,3 +1,5 @@
+
+<?php ob_start(); ?>
 <?php 
  session_start();
  if(!isset($_SESSION['username'])) {
@@ -11,6 +13,7 @@
 
 //  }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +28,7 @@
     <title>The Perfect Cup - Blog</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/business-casual.css" rel="stylesheet">
@@ -49,50 +52,120 @@
     <div class="address-bar">3481 Melrose Place | Beverly Hills, CA 90210 | 123.456.7890</div>
 
     <!-- Navigation -->
-    <?php require_once 'nav.php' ?>
 
-    
+
+
+
+<nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">The Perfect Cup</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.php">Home</a>
+                    </li>
+                    <li>
+                        <a href="about.php">About</a>
+                    </li>
+                    <li>
+                        <a href="blog.php">Blog</a>
+                    </li>
+                    <li>
+                        <a href="contact.php">Contact</a>
+                    </li>
+
+                    <li>
+                    <a href='admin'>Admin</a>
+                    </li>
+
+                    <li>
+                    <a href='logout.php'>Logout</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
     <div class="container">
 
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
+                <h2 class="text-center">Welcome </h2>
                     <hr>
                     <h2 class="intro-text text-center">The Perfect Cup
                         <strong>blog</strong>
                     </h2>
                     <hr>
                 </div>
+                <?php 
+                            $db = mysqli_connect('localhost', 'root', '', 'perfectcup') ;
+                            $query = "SELECT * FROM produits";
+                            $load_products_query = mysqli_query($db,$query);
+
+                            if (!$load_products_query) {
+                                die("QUERY FAILED". mysqli_error($db));
+                            }
+
+                            while ($row = mysqli_fetch_array($load_products_query)) {
+                                $id_produit = $row['id_produit'];
+                                $titre_produit = $row['titre_produit'];
+                                $image_produit = $row['image_produit'];
+                                $desc_produit = $row['desc_produit'];
+                                $infos_produit = $row['infos_produit'];
+                                $date_produit = $row['date_produit'];
+
+                                ?>
+                        
                 <div class="col-lg-12 text-center">
-                    <img class="img-responsive img-border img-full" src="img/slide-1.jpg" alt="">
-                    <h2>COCONUT OIL COFFEE
+                    <img class="img-responsive img-border img-full" src="img/<?php echo $image_produit ?>" alt="<?php echo $image_produit ?>">
+                    <h2><?php echo $titre_produit ?>
                         <br>
-                        <small>October 13, 2013</small>
+                        <small><?php echo $date_produit ?></small>
                     </h2>
-                    <p>Start your morning off with this great recipe for hot coffee with coconut oil and butter.</p>
-                    <button onclick="more()" class="btn btn-default btn-lg">Read More</button>
+                    <p><?php echo $desc_produit ?>.</p>
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal<?php echo $id_produit ?>">Read More</button>
+                    <a href = "admin/cart.php?item=<?php echo $id_produit ?>" class="btn btn-success btn-lg" data-dismiss="modal">Add To Cart</a>
                      <hr>
                 </div>
-                <div class="col-lg-12 text-center">
-                    <img class="img-responsive img-border img-full" src="img/slide-2.jpg" alt="">
-                    <h2>IRISH COFFEE
-                        <br>
-                        <small>October 13, 2013</small>
-                    </h2>
-                    <p>Take the edge off with a fresh hot cup of coffee make with Irish whiskey and Irish cream.</p>
-                    <button class="btn btn-default btn-lg">Read More</button>
-                     <hr>
-                </div>
-                <div class="col-lg-12 text-center">
-                    <img class="img-responsive img-border img-full" src="img/slide-3.jpg" alt="">
-                    <h2>FROZEN CARAMEL LATTE
-                        <br>
-                        <small>October 13, 2013</small>
-                    </h2>
-                    <p>Sweetened with caramel sauce and topped with whipped cream, this will make you happy any time of the day.</p>
-                    <button class="btn btn-default btn-lg">Read More</button>
-                    <hr>
-                </div>
+                 <!--Modal-1-->
+	<div id="myModal<?php echo $id_produit ?>" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+            <!--Modal Content-->
+            <div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss-="modal">&times;</button>
+				<h4 class="modal-title"><?php echo $titre_produit ?></h4>
+			</div>
+			<div class="modal-body">
+				<p><?php echo $infos_produit ?></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+            
+            </div>
+		</div>
+	</div>
+                        <?php
+                            }
+                        ?>
+                
                 <div class="col-lg-12 text-center">
                     <ul class="pager">
                         <li class="previous"><a href="#">&larr; Older</a>
@@ -106,56 +179,7 @@
 
     </div>
     <!--container -->
-    <!--Modal-1-->
-	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<!--Modal Content-->
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss-="modal">&times;</button>
-				<h4 class="modal-title">Coconut Oil Coffee</h4>
-			</div>
-			<div class="nodal-body">
-				<p>Sample Text</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
    
-    <!--Modal-2-->
-	<div id="myModal2" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<!--Modal Content-->
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss-="modal">&times;</button>
-				<h4 class="modal-title">Irish Coffee</h4>
-			</div>
-			<div class="nodal-body">
-				<p>Sample Text</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-   
-    <!--Modal-3-->
-	<div id="myModal3" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<!--Modal Content-->
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss-="modal">&times;</button>
-				<h4 class="modal-title">Frozen Caramel Latte</h4>
-			</div>
-			<div class="nodal-body">
-				<p>Sample Text</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-    </div>
    
     <footer>
         <div class="container">

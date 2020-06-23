@@ -1,3 +1,7 @@
+
+
+
+
 <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,6 +30,10 @@
                     <li>
                         <a href="contact.php">Contact</a>
                     </li>
+
+                    </li>
+
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
