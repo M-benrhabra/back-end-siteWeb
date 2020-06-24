@@ -29,7 +29,8 @@
                 </thead>
                 
                       <tbody>
-                      <?php 
+                      <?php
+                            $connection = mysqli_connect('Localhost','root','','perfectcup'); 
                             $query = "SELECT * FROM user";
                             $load_users_query = mysqli_query($connection,$query);
 

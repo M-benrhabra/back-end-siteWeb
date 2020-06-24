@@ -34,6 +34,7 @@
                 
                       <tbody>
                       <?php 
+                            $connection = mysqli_connect('Localhost','root','','perfectcup');
                             $query = "SELECT * FROM produits";
                             $load_products_query = mysqli_query($connection,$query);
 

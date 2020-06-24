@@ -1,6 +1,7 @@
 <?php include "admin_header.php" ?>
 <?php 
 
+$connection = mysqli_connect('Localhost','root','','perfectcup');
 if (isset($_GET['modifier'])) {
     $id_prod = $_GET['modifier']; 
 }

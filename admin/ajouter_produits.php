@@ -1,6 +1,7 @@
 <?php include "admin_header.php" ?>
 <?php 
 
+$connection = mysqli_connect('Localhost','root','','perfectcup');
 if (isset($_POST['ajouter_produits'])) {
     $titre_produit = $_POST['titre_produit'];
     $image_produit = $_FILES['image']['name'];
