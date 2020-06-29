@@ -1,6 +1,13 @@
+
+<?php session_start(); ?>
+
 <?php include "admin_header.php" ?>
 
-
+<?php
+    if (isset($_POST['mot_de_passe']) AND $_POST['mot_de_passe'] ==  "admin") // Si le mot de passe est bon
+    {
+    // On affiche les codes
+    ?>
 
             <div class="container-fluid">
 
@@ -28,3 +35,13 @@
         
 
     <?php include "admin_footer.php" ?>
+    
+    <?php
+    }
+    else // Sinon, on affiche un message d'erreur
+    {
+        echo '<p>Mot de passe incorrect</p>';
+    }
+    ?>
+
+   

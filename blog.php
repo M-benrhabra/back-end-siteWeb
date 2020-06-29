@@ -86,7 +86,7 @@
                     </li>
 
                     <li>
-                    <a href='admin'>Admin</a>
+                    <a href='admin/admin_db.php'>Admin</a>
                     </li>
 
                     <li>
@@ -200,4 +200,5 @@
 </body>
 
 </html>
+
 <?php } ?>

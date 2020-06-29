@@ -19,7 +19,7 @@ if(isset($_POST['submit'])){
 
     $mail->addAddress('meriem.benrhabra1@gmail.com');               // Name is optional
     $mail->addReplyTo($_POST['email'], $_POST['fname']);
-   
+    $mail->setForm($_POST['email'], $_POST['fname']);
 
     $mail->isHTML(true);                                  // Set email format to HTML
 
@@ -125,7 +125,7 @@ if(isset($_POST['submit'])){
                             </div>
                             <div class="form-group col-lg-4">
                                 <label>Email Address</label>
-                                <input type="email" id="email" name="email" maxlength="25" class="form-control">
+                                <input type="email" id="email" name="email" maxlength="35" class="form-control">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label>Subject </label>
