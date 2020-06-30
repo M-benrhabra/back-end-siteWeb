@@ -135,7 +135,7 @@
                         <a href="users.php"><i class="fa fa-fw fa-bar-chart-o"></i> Users</a>
                     </li>
                     <li>
-                        <a href="cart.php"><i class="fa fa-fw fa-table"></i> Cart</a>
+                        <a href="panier.php"><i class="fa fa-fw fa-table"></i> Cart</a>
                     </li>
                     
                    
